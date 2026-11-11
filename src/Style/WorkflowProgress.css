@@ -1,0 +1,44 @@
+.tpls__flow {
+  list-style: none;
+  display: flex;
+  gap: 0.6rem;
+  margin: 0 0 2rem;
+  padding: 0;
+  overflow-x: auto;
+}
+
+.tpls__flow-item {
+  flex: 1 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--mlink-white, #ffffff);
+  border: 1px solid var(--mlink-hairline, rgba(18, 58, 115, 0.12));
+  border-radius: 999px;
+  padding: 0.5rem 1rem 0.5rem 0.6rem;
+  font-size: 0.84rem;
+  font-weight: 600;
+  color: rgba(11, 31, 58, 0.55);
+  white-space: nowrap;
+}
+
+.tpls__flow-dot {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  background: rgba(18, 58, 115, 0.08);
+}
+
+.tpls__flow-item--on {
+  color: var(--mlink-black, #0b1f3a);
+  border-color: var(--mlink-red, #123a73);
+}
+
+.tpls__flow-item--on .tpls__flow-dot {
+  background: var(--mlink-red, #123a73);
+  color: var(--mlink-white, #ffffff);
+}

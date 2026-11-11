@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap");
+
+/* =========================================================
+   TOKENS  (every breakpoint only changes these values)
+   Palette: blue shades + white + deep navy (day theme)
+   ========================================================= */
+.crcz-section {
+  /* palette */
+  --crcz-blue-1: #dfeeff;
+  --crcz-blue-2: #1d5fbf;
+  --crcz-blue-3: #123a73;
+  --crcz-navy-deep: #0b1f3a;
+  --crcz-tint-1: #f4f9ff;
+  --crcz-tint-2: #edf6ff;
+  --crcz-tint-3: #dfeeff;
+  --crcz-white: #ffffff;
+  --crcz-ink: #0b1f3a;
+  --crcz-muted: #49698d;
+
+  /* optional real photo for the top area, e.g.
+     --crcz-leaf-photo: url("../assets/leaves.jpg"); */
+  --crcz-leaf-photo: none;
+
+  /* layout */
+  --crcz-section-pad: 7rem 1.5rem 7.5rem;
+  --crcz-card-max: 62rem;
+  --crcz-stage-h: 17rem;
+  --crcz-bar-w: 56%;
+  --crcz-circle: 6.4rem;
+  --crcz-ring: 5px;
+  --crcz-icon: 2.5rem;
+  --crcz-col-pad: 0 1.75rem 3.25rem;
+  --crcz-label: 0.76rem;
+  --crcz-label-track: 0.2em;
+  --crcz-detail: 0.84rem;
+  --crcz-heading: clamp(2rem, 4.4vw, 3.2rem);
+
+  /* scroll progress, written by JS (1 = fully revealed if JS never runs) */
+  --crcz-p: 1;
+
+  position: relative;
+  font-family: "Montserrat", sans-serif;
+  color: var(--crcz-ink);
+  padding: var(--crcz-section-pad);
+  background:
+    radial-gradient(56rem 26rem at 50% 0%, rgba(29, 95, 191, 0.1), transparent 70%),
+    linear-gradient(180deg, var(--crcz-white) 0%, var(--crcz-tint-1) 55%, var(--crcz-white) 100%);
+  overflow: hidden;
+}
+
+/* =========================================================
+   INTRO TEXT  (phase 1: eases in first)
+   ========================================================= */
+.crcz-top {
+  --ph: clamp(0, calc(var(--crcz-p) * 5), 1);
+  --ph-e: calc(1 - (1 - var(--ph)) * (1 - var(--ph)) * (1 - var(--ph)));
+  --ps: clamp(0, calc((var(--crcz-p) - 0.06) * 5), 1);
+  --ps-e: calc(1 - (1 - var(--ps)) * (1 - var(--ps)) * (1 - var(--ps)));
+
+  max-width: 46rem;
+  margin: 0 auto 3.75rem;
+  text-align: center;
+}
+
+.crcz-heading {
+  margin: 0 0 1.1rem;
+  font-size: var(--crcz-heading);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  color: var(--crcz-ink);
+  opacity: var(--ph-e);
+  transform: translateY(calc((1 - var(--ph-e)) * 28px));
+  filter: blur(calc((1 - var(--ph-e)) * 8px));
+  transition: opacity 0.15s linear, transform 0.15s linear, filter 0.15s linear;
+  will-change: opacity, transform, filter;
+}
+
+.crcz-heading-accent {
+  color: var(--crcz-blue-2);
+}
+
+.crcz-sub {
+  margin: 0 auto;
+  max-width: 46ch;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.7;
+  color: var(--crcz-muted);
+  opacity: var(--ps-e);
+  transform: translateY(calc((1 - var(--ps-e)) * 20px));
+  transition: opacity 0.15s linear, transform 0.15s linear;
+}
+
+/* =========================================================
+   CARD  (white panel + soft blue leaf stage on top)
+   ========================================================= */
+.crcz-card {
+  position: relative;
+  max-width: var(--crcz-card-max);
+  margin: 0 auto;
+  background: var(--crcz-white);
+  border-radius: 6px;
+  box-shadow:
+    0 0 0 1px rgba(11, 31, 58, 0.06),
+    0 40px 80px -34px rgba(18, 58, 115, 0.3),
+    0 18px 40px -28px rgba(11, 31, 58, 0.18);
+}
+
+.crcz-stage {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--crcz-stage-h);
+  border-radius: 6px 6px 0 0;
+  overflow: hidden;
+  z-index: 1;
+  background-color: var(--crcz-tint-2);
+  background-image:
+    var(--crcz-leaf-photo),
+    linear-gradient(180deg, var(--crcz-tint-2) 0%, var(--crcz-tint-3) 100%);
+  background-size: cover;
+  background-position: center;
+}
+
+.crcz-leaves {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  filter: blur(1px);
+  transform: translateY(calc((1 - var(--crcz-p)) * 22px)) scale(1.08);
+  transition: transform 0.15s linear;
+}
+
+.crcz-stage-shade {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(70% 90% at 50% 35%, rgba(255, 255, 255, 0.35) 0%, transparent 70%),
+    linear-gradient(180deg, transparent 55%, rgba(18, 58, 115, 0.12) 100%);
+}
+
+/* =========================================================
+   COLUMNS
+   ========================================================= */
+.crcz-grid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.crcz-col {
+  /* phase 2: bars   (p .20 → ~.65)
+     phase 3: circles (p .50 → ~.98)
+     phase 4: text    (p .62 → 1)     — each staggered per column */
+  --pb: clamp(0, calc((var(--crcz-p) - 0.2 - var(--i) * 0.06) * 3), 1);
+  --pc: clamp(0, calc((var(--crcz-p) - 0.5 - var(--i) * 0.06) * 2.8), 1);
+  --pt: clamp(0, calc((var(--crcz-p) - 0.62 - var(--i) * 0.05) * 3.8), 1);
+  /* ease-out */
+  --pb-e: calc(1 - (1 - var(--pb)) * (1 - var(--pb)));
+  --pc-e: calc(1 - (1 - var(--pc)) * (1 - var(--pc)));
+  --pt-e: calc(1 - (1 - var(--pt)) * (1 - var(--pt)));
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: var(--crcz-col-pad);
+}
+
+/* ---- rectangle: draws from top to bottom ---- */
+.crcz-bar-wrap {
+  width: 100%;
+  height: var(--crcz-stage-h);
+  display: flex;
+  justify-content: center;
+}
+
+.crcz-bar {
+  position: relative;
+  display: block;
+  width: var(--crcz-bar-w);
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    var(--crcz-blue-1) 0%,
+    var(--crcz-blue-2) 52%,
+    var(--crcz-blue-3) 100%
+  );
+  box-shadow: 0 30px 46px -30px rgba(11, 31, 58, 0.55);
+  clip-path: inset(0 0 calc((1 - var(--pb-e)) * 100%) 0);
+  transform: translateY(calc((1 - var(--pb-e)) * -28px));
+  transition: clip-path 0.12s linear, transform 0.12s linear;
+  will-change: clip-path, transform;
+}
+
+/* soft edge light + glossy top for a premium finish */
+.crcz-bar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0%, transparent 38%, rgba(0, 0, 0, 0.1) 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, transparent 35%);
+}
+
+/* ---- circle: rises from bottom to top ---- */
+.crcz-circle {
+  position: relative;
+  z-index: 3;
+  display: grid;
+  place-items: center;
+  width: var(--crcz-circle);
+  height: var(--crcz-circle);
+  margin-top: calc(var(--crcz-circle) / -2);
+  border-radius: 50%;
+  border: var(--crcz-ring) solid var(--crcz-white);
+  color: var(--crcz-white);
+  background: radial-gradient(
+    circle at 32% 26%,
+    var(--crcz-blue-1) 0%,
+    var(--crcz-blue-3) 100%
+  );
+  box-shadow:
+    0 18px 32px -14px rgba(18, 58, 115, 0.65),
+    0 0 0 1px rgba(18, 58, 115, 0.08);
+  opacity: var(--pc-e);
+  transform: translateY(calc((1 - var(--pc-e)) * 110px))
+    scale(calc(0.78 + 0.22 * var(--pc-e)));
+  transition:
+    transform 0.12s linear,
+    opacity 0.12s linear,
+    box-shadow 0.35s ease;
+  will-change: transform, opacity;
+}
+
+.crcz-circle svg {
+  width: var(--crcz-icon);
+  height: var(--crcz-icon);
+  transition: transform 0.45s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.crcz-col:hover .crcz-circle {
+  box-shadow:
+    0 22px 38px -14px rgba(18, 58, 115, 0.7),
+    0 0 0 6px rgba(29, 95, 191, 0.18);
+}
+
+.crcz-col:hover .crcz-circle svg {
+  transform: scale(1.12) rotate(-6deg);
+}
+
+/* ---- text ---- */
+.crcz-step-label {
+  margin: 1.7rem 0 0.7rem;
+  font-size: var(--crcz-label);
+  font-weight: 700;
+  letter-spacing: var(--crcz-label-track);
+  text-transform: uppercase;
+  color: var(--crcz-ink);
+  opacity: var(--pt-e);
+  transform: translateY(calc((1 - var(--pt-e)) * 16px));
+  transition: opacity 0.12s linear, transform 0.12s linear;
+}
+
+.crcz-step-detail {
+  margin: 0;
+  max-width: 24ch;
+  font-size: var(--crcz-detail);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--crcz-muted);
+  opacity: var(--pt-e);
+  transform: translateY(calc((1 - var(--pt-e)) * 16px));
+  transition: opacity 0.12s linear, transform 0.12s linear;
+}
+
+/* =========================================================
+   CTA  (centered)
+   ========================================================= */
+.crcz-cta-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 3.75rem;
+}
+
+.crcz-cta-primary {
+  font-family: "Montserrat", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--crcz-white);
+  background: linear-gradient(135deg, var(--crcz-blue-2) 0%, var(--crcz-navy-deep) 100%);
+  border: none;
+  padding: 1rem 2.4rem;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow:
+    0 14px 28px -12px rgba(18, 58, 115, 0.6),
+    inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.crcz-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 34px -12px rgba(18, 58, 115, 0.7),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+.crcz-cta-primary:focus-visible {
+  outline: 2px solid var(--crcz-ink);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BREAKPOINTS  (only tokens change)
+   ========================================================= */
+
+/* ≤ 1100px  — small desktop / landscape tablet */
+@media (max-width: 1100px) {
+  .crcz-section {
+    --crcz-section-pad: 6rem 1.5rem 6.5rem;
+    --crcz-card-max: 54rem;
+    --crcz-stage-h: 15.5rem;
+    --crcz-circle: 6rem;
+    --crcz-icon: 2.3rem;
+    --crcz-col-pad: 0 1.4rem 3rem;
+  }
+}
+
+/* ≤ 900px  — portrait tablet */
+@media (max-width: 900px) {
+  .crcz-section {
+    --crcz-section-pad: 5rem 1.25rem 5.5rem;
+    --crcz-card-max: 44rem;
+    --crcz-stage-h: 14rem;
+    --crcz-bar-w: 60%;
+    --crcz-circle: 5.4rem;
+    --crcz-icon: 2.1rem;
+    --crcz-col-pad: 0 1rem 2.75rem;
+    --crcz-label: 0.7rem;
+    --crcz-label-track: 0.16em;
+    --crcz-detail: 0.78rem;
+  }
+
+  .crcz-top {
+    margin-bottom: 3rem;
+  }
+}
+
+/* ≤ 640px  — large phones */
+@media (max-width: 640px) {
+  .crcz-section {
+    --crcz-section-pad: 4.25rem 1rem 4.75rem;
+    --crcz-stage-h: 11.5rem;
+    --crcz-bar-w: 64%;
+    --crcz-circle: 4.2rem;
+    --crcz-ring: 4px;
+    --crcz-icon: 1.6rem;
+    --crcz-col-pad: 0 0.45rem 2.25rem;
+    --crcz-label: 0.6rem;
+    --crcz-label-track: 0.1em;
+    --crcz-detail: 0.68rem;
+  }
+
+  .crcz-step-label {
+    margin-top: 1.2rem;
+  }
+
+  .crcz-step-detail {
+    line-height: 1.6;
+  }
+
+  .crcz-top {
+    margin-bottom: 2.5rem;
+  }
+
+  .crcz-cta-row {
+    margin-top: 2.75rem;
+  }
+}
+
+/* ≤ 420px  — small phones */
+@media (max-width: 420px) {
+  .crcz-section {
+    --crcz-stage-h: 9.5rem;
+    --crcz-bar-w: 68%;
+    --crcz-circle: 3.6rem;
+    --crcz-icon: 1.4rem;
+    --crcz-col-pad: 0 0.3rem 2rem;
+    --crcz-label: 0.54rem;
+    --crcz-label-track: 0.06em;
+    --crcz-detail: 0.62rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .crcz-leaves,
+  .crcz-heading,
+  .crcz-sub,
+  .crcz-bar,
+  .crcz-circle,
+  .crcz-step-label,
+  .crcz-step-detail,
+  .crcz-cta-primary {
+    transition: none;
+  }
+}

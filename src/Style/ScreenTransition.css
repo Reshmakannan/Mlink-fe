@@ -1,0 +1,32 @@
+/* Wraps whichever screen App.js is currently showing. Because App.js
+   gives this wrapper key={screen}, React remounts it on every screen
+   change, which replays this entrance animation automatically — so
+   every screen switch fades and slides in smoothly instead of snapping.
+
+   IMPORTANT: this animates opacity + margin-top, not transform.
+   Any `transform` here — even the harmless-looking final
+   translateY(0) — makes this element a "containing block" for every
+   position:fixed element inside it (modals, overlays, anywhere in the
+   app), which breaks them: they end up positioned against this box's
+   full height instead of the real viewport. margin-top gives the same
+   visual motion without that side effect. */
+.app-screen {
+  animation: mlink-screen-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes mlink-screen-in {
+  from {
+    opacity: 0;
+    margin-top: 10px;
+  }
+  to {
+    opacity: 1;
+    margin-top: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-screen {
+    animation: none;
+  }
+}

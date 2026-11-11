@@ -1,0 +1,168 @@
+/* Size it from the parent:  .something { --mascot-size: 120px; } */
+.mascot {
+  width: var(--mascot-size, 160px);
+  aspect-ratio: 200 / 230;
+  display: block;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  --ex: 0px;
+  --ey: 0px;
+}
+
+.mascot__svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+/* ---------- idle hop with squash & stretch ---------- */
+.mascot__bounce {
+  transform-origin: 100px 212px;
+}
+
+.mascot--hop .mascot__bounce {
+  animation: mascot-hop 3.4s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+}
+
+.mascot--hop .mascot__shadow {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-shadow 3.4s cubic-bezier(0.3, 0.7, 0.4, 1) infinite;
+}
+
+/* click: big boing (declared after hop so it wins) */
+.mascot--boing .mascot__bounce {
+  animation: mascot-boing 0.95s cubic-bezier(0.3, 0.7, 0.4, 1) 1;
+}
+
+/* ---------- wave, blink, swing ---------- */
+.mascot__arm {
+  transform-origin: 168px 146px;
+}
+
+.mascot__arm--wave {
+  animation: mascot-wave 1.5s ease-in-out infinite;
+}
+
+.mascot__rings {
+  transform-origin: 100px 56px;
+  animation: mascot-swing 3.4s ease-in-out infinite;
+}
+
+.mascot__eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: mascot-blink 4.4s infinite;
+}
+
+.mascot__pupil {
+  transform: translate(var(--ex), var(--ey));
+  transition: transform 0.08s linear;
+}
+
+@keyframes mascot-hop {
+  0%,
+  55%,
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+  60% {
+    transform: translateY(0) scale(1.08, 0.9);
+  }
+  72% {
+    transform: translateY(-22px) scale(0.95, 1.07);
+  }
+  84% {
+    transform: translateY(0) scale(1.06, 0.93);
+  }
+  90% {
+    transform: translateY(-5px) scale(0.99, 1.02);
+  }
+}
+
+@keyframes mascot-shadow {
+  0%,
+  55%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  72% {
+    transform: scale(0.72);
+    opacity: 0.6;
+  }
+  84% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+@keyframes mascot-boing {
+  0% {
+    transform: translateY(0) scale(1.15, 0.8);
+  }
+  28% {
+    transform: translateY(-46px) scale(0.88, 1.16);
+  }
+  55% {
+    transform: translateY(-20px) scale(1, 1);
+  }
+  72% {
+    transform: translateY(0) scale(1.12, 0.86);
+  }
+  86% {
+    transform: translateY(-8px) scale(0.97, 1.04);
+  }
+  100% {
+    transform: translateY(0) scale(1, 1);
+  }
+}
+
+@keyframes mascot-wave {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  25% {
+    transform: rotate(24deg);
+  }
+  50% {
+    transform: rotate(-4deg);
+  }
+  75% {
+    transform: rotate(22deg);
+  }
+}
+
+@keyframes mascot-swing {
+  0%,
+  100% {
+    transform: rotate(-4deg);
+  }
+  50% {
+    transform: rotate(5deg);
+  }
+}
+
+@keyframes mascot-blink {
+  0%,
+  91%,
+  100% {
+    transform: scaleY(1);
+  }
+  95% {
+    transform: scaleY(0.08);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot__bounce,
+  .mascot__shadow,
+  .mascot__arm,
+  .mascot__rings,
+  .mascot__eye {
+    animation: none !important;
+  }
+}

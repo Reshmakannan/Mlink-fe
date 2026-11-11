@@ -1,0 +1,263 @@
+.paym__overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgba(5, 25, 60, 0.66);
+  backdrop-filter: blur(4px);
+  overflow-y: auto;
+}
+
+.paym {
+  --red: #123a73;
+  --red-bright: #1d5fbf;
+  --black: #0b1f3a;
+
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  max-height: 92vh;
+  overflow-y: auto;
+  box-sizing: border-box;
+  background: #ffffff;
+  border-radius: 26px;
+  padding: 2rem 1.9rem 1.8rem;
+  font-family: "Inter", system-ui, sans-serif;
+  color: var(--black);
+  box-shadow:
+    0 40px 90px rgba(5, 25, 60, 0.36),
+    0 0 0 1px rgba(142, 197, 255, 0.12);
+}
+
+.paym::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--red), var(--red-bright));
+}
+
+.paym__x {
+  position: absolute;
+  top: 0.9rem;
+  right: 0.9rem;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: 1px solid rgba(18, 58, 115, 0.12);
+  background: #ffffff;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.paym__x:hover {
+  background: var(--black);
+  color: #ffffff;
+}
+
+.paym__eyebrow {
+  margin: 0 0 0.4rem;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--red);
+}
+
+.paym__title {
+  margin: 0 0 1.2rem;
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: 1.55rem;
+  line-height: 1.2;
+}
+
+.paym__list {
+  margin: 0 0 1rem;
+  background: #f4f9ff;
+  border: 1px solid rgba(18, 58, 115, 0.08);
+  border-radius: 16px;
+  padding: 0.4rem 1rem;
+}
+
+.paym__list > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(18, 58, 115, 0.08);
+  font-size: 0.9rem;
+}
+
+.paym__list > div:last-child {
+  border-bottom: none;
+}
+
+.paym__list dt {
+  color: rgba(18, 4, 4, 0.6);
+}
+
+.paym__list dd {
+  margin: 0;
+  text-align: right;
+  font-weight: 600;
+}
+
+.paym__list dd span {
+  display: block;
+  font-weight: 400;
+  font-size: 0.78rem;
+  color: rgba(18, 4, 4, 0.55);
+}
+
+.paym__small {
+  margin: 0 0 1rem;
+  font-size: 0.8rem;
+  line-height: 1.55;
+  color: rgba(18, 4, 4, 0.6);
+}
+
+.paym__fields {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  border: 0;
+}
+
+.paym__fields legend {
+  margin-bottom: 0.65rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.paym__field {
+  display: grid;
+  gap: 0.35rem;
+  font-size: 0.82rem;
+  font-weight: 500;
+}
+
+.paym__field input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.8rem;
+  border: 1px solid rgba(18, 58, 115, 0.18);
+  border-radius: 10px;
+  font: inherit;
+}
+
+.paym__field input:focus {
+  outline: 2px solid rgba(29, 95, 191, 0.2);
+  border-color: var(--red);
+}
+
+.paym__consent {
+  display: flex;
+  gap: 0.7rem;
+  align-items: flex-start;
+  margin-bottom: 1.2rem;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  cursor: pointer;
+}
+
+.paym__consent input {
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  accent-color: var(--red);
+}
+
+.paym__error {
+  margin: 0 0 1rem;
+  padding: 0.7rem 0.9rem;
+  border-radius: 12px;
+  background: #edf6ff;
+  border: 1px solid #cfe6ff;
+  color: #123a73;
+  font-size: 0.85rem;
+}
+
+.paym__btn {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border: 1.5px solid var(--red);
+  border-radius: 999px;
+  background: var(--red);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow:
+    0 12px 26px rgba(29, 95, 191, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.22);
+  transition: transform 0.18s ease, background 0.18s ease;
+}
+
+.paym__btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--red-bright);
+}
+
+.paym__btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+  box-shadow: none;
+}
+
+.paym__btn--ghost {
+  background: transparent;
+  color: var(--black);
+  border-color: rgba(18, 58, 115, 0.15);
+  box-shadow: none;
+}
+
+.paym__msg {
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 600;
+}
+
+.paym__confirming {
+  text-align: center;
+  padding: 1.5rem 0;
+}
+
+.paym__spinner {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  border: 3px solid rgba(122, 13, 13, 0.18);
+  border-top-color: var(--red);
+  border-radius: 50%;
+  animation: paym-spin 0.8s linear infinite;
+}
+
+@keyframes paym-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 480px) {
+  .paym {
+    padding: 1.6rem 1.2rem 1.4rem;
+    border-radius: 22px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .paym__spinner {
+    animation: none;
+  }
+  .paym__btn {
+    transition: none;
+  }
+}

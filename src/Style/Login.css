@@ -1,0 +1,607 @@
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #edf6ff 0%, #ffffff 45%, #ebf4ff 100%);
+  font-family: "Outfit", sans-serif;
+  padding: 20px;
+}
+
+.auth-card {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  min-height: 460px;
+  border-radius: 20px;
+  background: #ffffff;
+  box-shadow: 0 30px 60px rgba(17, 59, 122, 0.18),
+    0 4px 12px rgba(17, 59, 122, 0.08);
+  overflow: hidden;
+}
+
+/* ---------- Form containers ---------- */
+.form-container {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: 50%;
+  display: flex;
+  align-items: center;
+  transition: all 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.auth-form {
+  width: 100%;
+  padding: 34px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+
+.sign-in-container {
+  left: 0;
+  z-index: 2;
+}
+
+.sign-up-container {
+  left: 0;
+  z-index: 1;
+  opacity: 0;
+}
+
+.auth-card.right-panel-active .sign-in-container {
+  transform: translateX(100%);
+  opacity: 0;
+  z-index: 1;
+}
+
+.auth-card.right-panel-active .sign-up-container {
+  transform: translateX(100%);
+  opacity: 1;
+  z-index: 5;
+}
+
+/* ---------- Text ---------- */
+.auth-brand {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 2.4px;
+  text-transform: uppercase;
+  color: #123a73;
+  margin-bottom: 4px;
+  text-decoration: none;
+}
+
+.auth-title {
+  font-size: 23px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  color: #18141f;
+  margin: 0 0 2px;
+}
+
+.auth-subtitle {
+  font-size: 12.5px;
+  color: #9291a3;
+  margin: 0 0 6px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.input-group label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #4b4d6b;
+}
+
+/* ---------- Input with icon + eye toggle ---------- */
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.field-icon {
+  position: absolute;
+  left: 13px;
+  width: 17px;
+  height: 17px;
+  color: #6a8ec7;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 10.5px 14px 10.5px 40px;
+  border-radius: 10px;
+  border: 1.5px solid #d5e5fb;
+  font-size: 13.5px;
+  font-family: inherit;
+  color: #1e1b2e;
+  background: #f4f9ff;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.input-wrapper input::placeholder {
+  color: #b7b5c2;
+}
+
+.input-wrapper input:focus {
+  border-color: #1d5fbf;
+  box-shadow: 0 0 0 4px rgba(29, 95, 191, 0.1);
+  background: #ffffff;
+}
+
+/* Neutralize Chrome/Edge saved-password highlight */
+.input-wrapper input:-webkit-autofill,
+.input-wrapper input:-webkit-autofill:hover,
+.input-wrapper input:-webkit-autofill:focus {
+  -webkit-text-fill-color: #1e1b2e;
+  -webkit-box-shadow: 0 0 0px 1000px #f4f9ff inset;
+  transition: background-color 9999s ease-in-out 0s;
+}
+
+.eye-btn {
+  position: absolute;
+  right: 11px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  cursor: pointer;
+  color: #a3a1b3;
+  transition: color 0.15s ease;
+}
+
+.eye-btn:hover {
+  color: #123a73;
+}
+
+.toggle-icon {
+  width: 17px;
+  height: 17px;
+}
+
+/* password inputs need room on the right for the eye icon */
+#password,
+#signup-password,
+#confirmPassword {
+  padding-right: 38px;
+}
+
+.auth-forgot {
+  font-size: 12px;
+  font-weight: 500;
+  color: #123a73;
+  text-decoration: none;
+  align-self: flex-end;
+  margin-top: -4px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.auth-forgot:hover {
+  text-decoration: underline;
+}
+
+.auth-resend-btn {
+  align-self: center;
+  padding: 7px 10px;
+  border: 0;
+  background: transparent;
+  color: #123a73;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-resend-btn:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.auth-resend-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.auth-error {
+  color: #123a73;
+  font-size: 12.5px;
+  margin: 0;
+  text-align: center;
+}
+
+.auth-btn {
+  margin-top: 6px;
+  padding: 12.5px;
+  border: none;
+  border-radius: 24px;
+  background: linear-gradient(135deg, #1d5fbf, #123a73);
+  color: #ffffff;
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(29, 95, 191, 0.28);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.25s ease;
+}
+
+.auth-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #1c4fa8, #0b1f3a);
+  box-shadow: 0 14px 28px rgba(29, 95, 191, 0.36);
+}
+
+.auth-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.auth-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+/* ---------- Sliding red overlay ---------- */
+.overlay-container {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  z-index: 100;
+}
+
+.auth-card.right-panel-active .overlay-container {
+  transform: translateX(-100%);
+}
+
+.overlay {
+  position: relative;
+  left: -100%;
+  height: 100%;
+  width: 200%;
+  background: linear-gradient(135deg, #2b6fe5 0%, #1d5fbf 48%, #0b1f3a 100%);
+  color: #ffffff;
+  transform: translateX(0);
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+  overflow: hidden;
+}
+
+.overlay::before {
+  content: "";
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+  top: -110px;
+  left: 15%;
+}
+
+.overlay::after {
+  content: "";
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.06);
+  bottom: -70px;
+  right: 12%;
+}
+
+.auth-card.right-panel-active .overlay {
+  transform: translateX(50%);
+}
+
+.overlay-panel {
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  height: 100%;
+  width: 50%;
+  padding: 0 36px;
+  transition: transform 0.6s cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+.overlay-left {
+  transform: translateX(-20%);
+}
+
+.auth-card.right-panel-active .overlay-left {
+  transform: translateX(0);
+}
+
+.overlay-right {
+  right: 0;
+  transform: translateX(0);
+}
+
+.auth-card.right-panel-active .overlay-right {
+  transform: translateX(20%);
+}
+
+.overlay-title {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin: 0 0 10px;
+  color: #ffffff;
+}
+
+.overlay-text {
+  font-size: 13px;
+  line-height: 1.55;
+  margin: 0 0 20px;
+  color: #ffe3e3;
+}
+
+.ghost-btn {
+  padding: 11px 32px;
+  border-radius: 24px;
+  border: 1.5px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, transform 0.15s ease;
+}
+
+.ghost-btn:hover {
+  background: #ffffff;
+  color: #123a73;
+  transform: translateY(-2px);
+}
+
+/* ================================================================
+   MODAL: overlay + popup animation (used when Login is opened from
+   Hero.js as a popup rather than a full page). Every metric above
+   (padding, gaps, font sizes) was tightened specifically so this card
+   fits inside a normal viewport without needing to scroll.
+   ================================================================ */
+.auth-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(10, 6, 12, 0.65);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  animation: authOverlayIn 0.28s ease forwards;
+}
+
+.auth-modal-overlay.closing {
+  animation: authOverlayOut 0.28s ease forwards;
+}
+
+@keyframes authOverlayIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes authOverlayOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.auth-modal-box {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  border-radius: 20px;
+  opacity: 0;
+  transform: scale(0.92) translateY(14px);
+  animation: authModalIn 0.32s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.45);
+}
+
+.auth-modal-overlay.closing .auth-modal-box {
+  animation: authModalOut 0.24s ease forwards;
+}
+
+@keyframes authModalIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes authModalOut {
+  from {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.94) translateY(10px);
+  }
+}
+
+.auth-modal-box .auth-card {
+  width: 100%;
+  min-height: 520px;
+  margin: 0;
+}
+
+.auth-card.right-panel-active .sign-up-container {
+  align-items: flex-start;
+  overflow-y: auto;
+}
+
+.auth-card.right-panel-active .sign-up-container .auth-form {
+  padding-top: 44px;
+}
+
+.auth-modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.9);
+  color: #4b4d6b;
+  font-size: 18px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 200;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+.auth-modal-close:hover {
+  background: #123a73;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+/* ---------- Mobile: stack instead of slide ---------- */
+@media (max-width: 640px) {
+  .auth-card {
+    min-height: unset;
+  }
+
+  .auth-form {
+    padding: 30px 26px;
+  }
+
+  .form-container,
+  .overlay-container {
+    position: relative;
+    width: 100%;
+    left: 0;
+    transform: none !important;
+  }
+
+  .sign-up-container {
+    display: none;
+  }
+
+  .auth-card.right-panel-active .sign-in-container {
+    display: none;
+  }
+
+  .auth-card.right-panel-active .sign-up-container {
+    display: flex;
+    opacity: 1;
+  }
+
+  .auth-card.right-panel-active .sign-up-container .auth-form {
+    padding-top: 48px;
+  }
+
+  .overlay {
+    position: relative;
+    left: 0;
+    width: 100%;
+    transform: none !important;
+    padding: 22px 0;
+  }
+
+  .overlay-panel {
+    position: relative;
+    width: 100%;
+    padding: 10px 22px;
+    transform: none !important;
+  }
+
+  .overlay-left {
+    display: none;
+  }
+
+  .auth-card.right-panel-active .overlay-right {
+    display: none;
+  }
+
+  .auth-card.right-panel-active .overlay-left {
+    display: flex;
+  }
+
+  .auth-modal-box {
+    max-width: 100%;
+    max-height: 92vh;
+    overflow-y: auto;
+    border-radius: 16px;
+  }
+
+  .auth-modal-box .auth-card {
+    min-height: unset;
+  }
+
+  .auth-modal-overlay {
+    padding: 10px;
+    align-items: flex-start;
+    padding-top: 24px;
+  }
+
+  .auth-modal-close {
+    top: 10px;
+    right: 10px;
+  }
+}
+
+@media (max-width: 900px) and (min-width: 641px) {
+  .auth-modal-box {
+    max-width: 620px;
+  }
+
+  .auth-modal-box .auth-card {
+    min-height: 500px;
+  }
+}
+
+/* Safety net only: on unusually short desktop viewports (e.g. a
+   small laptop with browser chrome eating vertical space), let the
+   modal shrink and scroll rather than clip — this should rarely, if
+   ever, trigger given the compact sizing above. */
+@media (max-height: 600px) {
+  .auth-modal-box {
+    max-height: 94vh;
+    overflow-y: auto;
+  }
+}

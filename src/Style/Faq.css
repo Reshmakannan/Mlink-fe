@@ -1,0 +1,470 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+.mlink-faq {
+  --mlink-red: #1d5fbf;
+  --mlink-black: #0b1f3a;
+  --mlink-white: #ffffff;
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+  position: relative;
+  overflow: hidden;
+  background: var(--mlink-white);
+  font-family: "Poppins", system-ui, sans-serif;
+  padding: 8rem 6vw 7rem;
+}
+
+/* =========================================================
+   SCROLL REVEAL — everything slides in from the top, staggered
+   (--d is the per-element delay set in the JSX)
+   ========================================================= */
+.mlink-faq__rv,
+.mlink-faq__drop {
+  opacity: 0;
+  transform: translateY(-40px);
+  transition:
+    opacity 0.9s var(--ease-out) var(--d, 0s),
+    transform 0.9s var(--ease-out) var(--d, 0s);
+}
+
+/* SVG parts need a bigger drop (SVG units) */
+.mlink-faq__drop {
+  transform: translateY(-90px);
+}
+
+.mlink-faq__fade {
+  opacity: 0;
+  transition: opacity 1.2s ease var(--d, 0s);
+}
+
+.mlink-faq--in .mlink-faq__rv,
+.mlink-faq--in .mlink-faq__drop {
+  opacity: 1;
+  transform: none;
+}
+
+.mlink-faq--in .mlink-faq__fade {
+  opacity: 1;
+}
+
+/* =========================================================
+   BACKGROUND DECORATION
+   ========================================================= */
+.mlink-faq__glow,
+.mlink-faq__dots,
+.mlink-faq__shape {
+  position: absolute;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mlink-faq__glow {
+  border-radius: 50%;
+}
+
+.mlink-faq__glow--left {
+  left: -9%;
+  top: 14%;
+  width: 640px;
+  height: 640px;
+  background: radial-gradient(circle, rgba(76, 138, 240, 0.16) 0%, rgba(76, 138, 240, 0) 68%);
+}
+
+.mlink-faq__glow--right {
+  right: -12%;
+  bottom: -22%;
+  width: 560px;
+  height: 560px;
+  background: radial-gradient(circle, rgba(29, 95, 191, 0.13) 0%, rgba(29, 95, 191, 0) 70%);
+}
+
+.mlink-faq__dots {
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(var(--mlink-red) 1.6px, transparent 1.8px);
+  background-size: 16px 16px;
+  -webkit-mask-image: linear-gradient(135deg, #000 20%, transparent 85%);
+  mask-image: linear-gradient(135deg, #000 20%, transparent 85%);
+}
+
+.mlink-faq__dots--tr {
+  right: 3%;
+  top: 11%;
+}
+
+.mlink-faq__dots--bl {
+  left: 3%;
+  bottom: 7%;
+  transform: rotate(180deg);
+}
+
+.mlink-faq__shape {
+  display: block;
+}
+
+.mlink-faq__shape--ring {
+  left: 47%;
+  top: 19%;
+  width: 26px;
+  height: 26px;
+  border: 3px solid var(--mlink-red);
+  border-radius: 50%;
+  animation: mlink-float 7s ease-in-out infinite;
+}
+
+.mlink-faq__shape--dot {
+  left: 44%;
+  bottom: 17%;
+  width: 12px;
+  height: 12px;
+  background: var(--mlink-red);
+  border-radius: 50%;
+  animation: mlink-float 6s ease-in-out -2s infinite;
+}
+
+.mlink-faq__shape--dot-black {
+  left: 6%;
+  top: 22%;
+  width: 9px;
+  height: 9px;
+  background: var(--mlink-black);
+  border-radius: 50%;
+  animation: mlink-float 8s ease-in-out -4s infinite;
+}
+
+.mlink-faq__shape--plus {
+  right: 4.5%;
+  bottom: 14%;
+  width: 22px;
+  height: 22px;
+  animation: mlink-float 9s ease-in-out -1s infinite;
+}
+
+.mlink-faq__shape--plus::before,
+.mlink-faq__shape--plus::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--mlink-red);
+  border-radius: 2px;
+}
+
+.mlink-faq__shape--plus::before {
+  width: 3px;
+  height: 22px;
+}
+
+.mlink-faq__shape--plus::after {
+  width: 22px;
+  height: 3px;
+}
+
+/* =========================================================
+   LAYOUT
+   ========================================================= */
+.mlink-faq__inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.mlink-faq__art {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.mlink-faq__qmark {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600;
+  font-size: 44px;
+  fill: var(--mlink-red);
+  animation: mlink-float-svg 3.4s ease-in-out infinite;
+}
+
+/* ---------- text ---------- */
+.mlink-faq__content {
+  text-align: left;
+}
+
+.mlink-faq__headline {
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.4vw, 2rem);
+  line-height: 1.25;
+  color: var(--mlink-black);
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+.mlink-faq__sub {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  color: rgba(11, 31, 58, 0.62);
+  max-width: 44ch;
+  margin: 0 0 2rem;
+  text-align: left;
+}
+
+/* =========================================================
+   ACCORDION
+   ========================================================= */
+.mlink-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.mlink-faq__item {
+  background: var(--mlink-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 14px rgba(18, 4, 4, 0.07);
+  border-left: 3px solid transparent;
+  transition:
+    opacity 0.9s var(--ease-out) var(--d, 0s),
+    transform 0.9s var(--ease-out) var(--d, 0s),
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.mlink-faq__item:hover {
+  box-shadow: 0 4px 18px rgba(18, 4, 4, 0.11);
+}
+
+.mlink-faq__item--open {
+  border-left-color: var(--mlink-red);
+}
+
+.mlink-faq__question {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  background: none;
+  border: none;
+  text-align: left;
+  font-family: inherit;
+  font-weight: 500;
+  font-size: 0.92rem;
+  color: var(--mlink-black);
+  padding: 1.05rem 1.25rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.mlink-faq__question:focus-visible {
+  outline: 2px solid var(--mlink-red);
+  outline-offset: 2px;
+}
+
+.mlink-faq__icon {
+  position: relative;
+  flex: none;
+  width: 16px;
+  height: 16px;
+}
+
+.mlink-faq__icon-bar {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  background: var(--mlink-red);
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.mlink-faq__icon-bar--v {
+  width: 2px;
+  height: 14px;
+}
+
+.mlink-faq__icon-bar--h {
+  width: 14px;
+  height: 2px;
+}
+
+.mlink-faq__icon--open .mlink-faq__icon-bar--v {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+
+.mlink-faq__panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s ease;
+}
+
+.mlink-faq__panel--open {
+  grid-template-rows: 1fr;
+}
+
+.mlink-faq__panel-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.mlink-faq__answer {
+  font-size: 0.88rem;
+  line-height: 1.7;
+  color: rgba(18, 4, 4, 0.7);
+  margin: 0;
+  padding: 0 3rem 1.25rem 1.25rem;
+}
+
+/* =========================================================
+   IDLE ANIMATION FOR THE BLACK PEOPLE
+   ========================================================= */
+.mlink-faq__idle,
+.mlink-faq__head,
+.mlink-faq__dot {
+  transform-box: fill-box;
+}
+
+.mlink-faq__idle {
+  transform-origin: 50% 100%;
+}
+
+/* typing on top of the F */
+.mlink-faq__idle--p1 {
+  animation: mlink-bob 2.6s ease-in-out infinite;
+}
+
+/* standing person sways gently in front of the A */
+.mlink-faq__idle--p2 {
+  transform-origin: 50% 100%;
+  animation: mlink-sway 3.6s ease-in-out infinite;
+}
+
+/* person inside the Q bobs */
+.mlink-faq__idle--p3 {
+  animation: mlink-bob 3s ease-in-out -1s infinite;
+}
+
+/* person at the bottom of the F types */
+.mlink-faq__idle--p4 {
+  animation: mlink-bob 2.2s ease-in-out -0.6s infinite;
+}
+
+.mlink-faq__idle--plant {
+  transform-origin: 50% 100%;
+  animation: mlink-sway 4.4s ease-in-out -1s infinite;
+}
+
+.mlink-faq__idle--bubble {
+  transform-origin: 20% 100%;
+  animation: mlink-pop 3.2s ease-in-out infinite;
+}
+
+.mlink-faq__head {
+  transform-origin: 50% 100%;
+  animation: mlink-nod 1.6s ease-in-out infinite;
+}
+
+.mlink-faq__dot {
+  animation: mlink-dot 1.4s ease-in-out infinite;
+}
+
+.mlink-faq__dot--2 {
+  animation-delay: 0.2s;
+}
+
+.mlink-faq__dot--3 {
+  animation-delay: 0.4s;
+}
+
+@keyframes mlink-bob {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-4px); }
+}
+
+@keyframes mlink-sway {
+  0%, 100% { transform: rotate(-2deg); }
+  50%      { transform: rotate(2deg); }
+}
+
+@keyframes mlink-nod {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(1.5px); }
+}
+
+@keyframes mlink-pop {
+  0%, 100% { transform: scale(1); }
+  50%      { transform: scale(1.08); }
+}
+
+@keyframes mlink-dot {
+  0%, 100% { opacity: 0.3; }
+  50%      { opacity: 1; }
+}
+
+@keyframes mlink-float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-12px); }
+}
+
+@keyframes mlink-float-svg {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+
+/* =========================================================
+   ACCESSIBILITY / RESPONSIVE
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .mlink-faq__rv,
+  .mlink-faq__drop,
+  .mlink-faq__fade {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .mlink-faq__panel,
+  .mlink-faq__icon-bar {
+    transition: none;
+  }
+  .mlink-faq__idle,
+  .mlink-faq__head,
+  .mlink-faq__dot,
+  .mlink-faq__shape,
+  .mlink-faq__qmark {
+    animation: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .mlink-faq {
+    padding: 7rem 6vw 5rem;
+  }
+  .mlink-faq__inner {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .mlink-faq__visual {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+  .mlink-faq__dots--tr,
+  .mlink-faq__shape--ring {
+    display: none;
+  }
+}
+
+@media (max-width: 560px) {
+  .mlink-faq__dots,
+  .mlink-faq__shape--plus {
+    display: none;
+  }
+  .mlink-faq__glow--left {
+    width: 420px;
+    height: 420px;
+  }
+  .mlink-faq__answer {
+    padding-right: 1.25rem;
+  }
+}   

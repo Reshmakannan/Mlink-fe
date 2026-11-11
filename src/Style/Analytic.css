@@ -1,0 +1,579 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap");
+
+/* =========================================================
+   TOKENS  (breakpoints below only change these values)
+   ========================================================= */
+.mlink-analytics {
+  /* palette — unchanged */
+  --mlink-panel-red: #123a73;
+  --mlink-panel-red-deep: #0b1f3a;
+  --mlink-panel-white: #edf6ff;
+  --mlink-black: #0b1f3a;
+  --mlink-white: #ffffff;
+  --mlink-coral: #8ec5ff;
+
+  /* layout */
+  --an-pad: 6.5rem 6vw;
+  --an-col-gap: 4rem;
+  --an-cards-max: 34rem;
+  --an-copy-max: 32rem;
+  --an-card-gap: 1.1rem;
+  --an-card-pad: 1.6rem 1.5rem;
+  --an-card-min: 150px;
+  --an-card-min-lg: 200px;
+  --an-fig: 1.9rem;
+  --an-fig-lg: 2.6rem;
+  --an-headline: clamp(2.2rem, 4vw, 3.2rem);
+  --an-body: 1.05rem;
+  --an-list: 0.98rem;
+
+  position: relative;
+  font-family: "Inter", system-ui, sans-serif;
+  background:
+    radial-gradient(ellipse at 76% 18%, rgba(76, 138, 240, 0.32), transparent 34%),
+    linear-gradient(
+      105deg,
+      #f7fbff 0%,
+      var(--mlink-panel-white) 49.8%,
+      var(--mlink-panel-red) 50.2%,
+      var(--mlink-panel-red-deep) 100%
+    );
+  padding: var(--an-pad);
+  overflow: hidden;
+}
+
+/* soft depth where the two panels meet */
+.mlink-analytics::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 7rem;
+  background: linear-gradient(90deg, rgba(5, 25, 60, 0.2), rgba(92, 161, 255, 0.08), transparent);
+  pointer-events: none;
+}
+
+/* two equal halves, content hugging the centre line symmetrically */
+.mlink-analytics__inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.mlink-analytics__left {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: var(--an-col-gap);
+}
+
+.mlink-analytics__right {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: var(--an-col-gap);
+}
+
+/* =========================================================
+   ZOOM ENTRANCE (shared by every animated element)
+   ========================================================= */
+.mlink-zoom {
+  opacity: 0;
+}
+
+.mlink-analytics .is-in .mlink-zoom {
+  animation: an-zoom 0.95s cubic-bezier(0.2, 0.8, 0.2, 1) var(--d, 0s) both;
+}
+
+@keyframes an-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.82);
+  }
+  55% {
+    opacity: 1;
+    transform: scale(1.035);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* =========================================================
+   STAT CARDS  (left, sit on the cream panel)
+   ========================================================= */
+.mlink-analytics__cards {
+  width: 100%;
+  max-width: var(--an-cards-max);
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-rows: auto auto;
+  gap: var(--an-card-gap);
+}
+
+.mlink-stat {
+  position: relative;
+  overflow: hidden;
+  border-radius: 22px;
+  padding: var(--an-card-pad);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: var(--an-card-min);
+  box-shadow:
+    0 28px 46px -22px rgba(11, 31, 58, 0.35),
+    0 6px 14px -8px rgba(11, 31, 58, 0.18);
+  transition: translate 0.35s ease, box-shadow 0.35s ease;
+}
+
+.mlink-stat:hover {
+  translate: 0 -5px;
+  box-shadow:
+    0 36px 56px -22px rgba(11, 31, 58, 0.42),
+    0 8px 18px -8px rgba(11, 31, 58, 0.2);
+}
+
+/* glossy top light */
+.mlink-stat::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.09) 0%,
+    rgba(255, 255, 255, 0) 42%
+  );
+  pointer-events: none;
+}
+
+.mlink-stat--clicks {
+  grid-column: 1;
+  grid-row: 1;
+  background: var(--mlink-black);
+  color: var(--mlink-white);
+  min-height: var(--an-card-min-lg);
+}
+
+.mlink-stat--views {
+  grid-column: 2;
+  grid-row: 1;
+  background: var(--mlink-white);
+  color: var(--mlink-black);
+  border: 1px solid rgba(11, 31, 58, 0.1);
+}
+
+.mlink-stat--views::after {
+  background: linear-gradient(
+    180deg,
+    rgba(29, 95, 191, 0.08) 0%,
+    rgba(29, 95, 191, 0) 45%
+  );
+}
+
+.mlink-stat--links {
+  grid-column: 1;
+  grid-row: 2;
+  background: linear-gradient(
+    145deg,
+    var(--mlink-panel-red) 0%,
+    var(--mlink-panel-red-deep) 100%
+  );
+  color: var(--mlink-white);
+}
+
+.mlink-stat--top {
+  grid-column: 2;
+  grid-row: 2;
+  background: var(--mlink-black);
+  color: var(--mlink-white);
+}
+
+.mlink-stat__badge {
+  position: absolute;
+  top: 1.2rem;
+  right: 1.2rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #8ec5ff;
+  background: rgba(18, 58, 115, 0.12);
+  border: 1px solid rgba(29, 95, 191, 0.3);
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+}
+
+.mlink-stat__chart {
+  display: block;
+  width: 100%;
+  height: auto;
+  color: var(--mlink-coral);
+  margin-bottom: 0.9rem;
+  overflow: visible;
+}
+
+.mlink-stat__line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+}
+
+.mlink-stat__area {
+  opacity: 0;
+}
+
+.mlink-analytics .is-in .mlink-stat__line {
+  animation: an-draw 1.7s cubic-bezier(0.4, 0, 0.2, 1) 0.45s forwards;
+}
+
+.mlink-analytics .is-in .mlink-stat__area {
+  animation: an-fade 1s ease 1.3s forwards;
+}
+
+@keyframes an-draw {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes an-fade {
+  to {
+    opacity: 1;
+  }
+}
+
+.mlink-stat__icon {
+  width: 28px;
+  height: 28px;
+  margin-bottom: 1rem;
+}
+
+.mlink-stat--views .mlink-stat__icon {
+  color: var(--mlink-panel-red);
+}
+
+.mlink-stat__place {
+  font-size: 0.8rem;
+  font-weight: 500;
+  opacity: 0.7;
+  margin: 0 0 1.4rem;
+}
+
+.mlink-stat__figure {
+  font-family: "Fraunces", serif;
+  font-weight: 600;
+  font-size: var(--an-fig);
+  margin: 0;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-variant-numeric: tabular-nums;
+}
+
+.mlink-stat--clicks .mlink-stat__figure {
+  font-size: var(--an-fig-lg);
+}
+
+.mlink-stat__label {
+  font-size: 0.85rem;
+  font-weight: 500;
+  margin: 0.45rem 0 0;
+  opacity: 0.75;
+}
+
+.mlink-stat__bar {
+  display: block;
+  height: 5px;
+  margin-top: 1rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  overflow: hidden;
+}
+
+.mlink-stat__bar i {
+  display: block;
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #8ec5ff, #dfeeff);
+  transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.9s;
+}
+
+.mlink-analytics .is-in .mlink-stat__bar i {
+  width: var(--w, 40%);
+}
+
+/* =========================================================
+   COPY  (right, sits on the red panel)
+   ========================================================= */
+.mlink-analytics__copy {
+  width: 100%;
+  max-width: var(--an-copy-max);
+  color: var(--mlink-white);
+}
+
+.mlink-analytics__copy .mlink-zoom {
+  transform-origin: left center;
+}
+
+.mlink-analytics__eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  margin-bottom: 1.4rem;
+  padding: 0.45rem 0.95rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mlink-white);
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 999px;
+}
+
+.mlink-analytics__eyebrow i {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--mlink-white);
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+}
+
+.mlink-analytics__headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: var(--an-headline);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.4rem;
+  color: var(--mlink-white);
+}
+
+.mlink-analytics__sub {
+  font-size: var(--an-body);
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.86);
+  margin: 0 0 1.9rem;
+  max-width: 44ch;
+}
+
+.mlink-analytics__list {
+  list-style: none;
+  margin: 0 0 2.4rem;
+  padding: 1.5rem 0 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 0.95rem;
+}
+
+.mlink-analytics__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.85rem;
+  font-size: var(--an-list);
+  line-height: 1.5;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.95);
+  transform-origin: left center;
+}
+
+.mlink-analytics__check {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-top: 0.05rem;
+  border-radius: 50%;
+  background: var(--mlink-white);
+  color: var(--mlink-panel-red-deep);
+  box-shadow: 0 6px 12px -6px rgba(11, 31, 58, 0.5);
+}
+
+.mlink-analytics__check svg {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.mlink-analytics__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--mlink-black);
+  background: var(--mlink-white);
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 1.9rem 1rem 2.2rem;
+  cursor: pointer;
+  box-shadow:
+    0 16px 30px -10px rgba(11, 31, 58, 0.45),
+    inset 0 -2px 0 rgba(29, 95, 191, 0.18);
+  transition: translate 0.2s ease, box-shadow 0.2s ease;
+}
+
+.mlink-analytics__cta svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  transition: translate 0.2s ease;
+}
+
+.mlink-analytics__cta:hover {
+  translate: 0 -2px;
+  box-shadow:
+    0 22px 36px -10px rgba(11, 31, 58, 0.52),
+    inset 0 -2px 0 rgba(29, 95, 191, 0.18);
+}
+
+.mlink-analytics__cta:hover svg {
+  translate: 4px 0;
+}
+
+.mlink-analytics__cta:focus-visible {
+  outline: 3px solid var(--mlink-white);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BREAKPOINTS  (only tokens + stacking change)
+   ========================================================= */
+
+/* ≤ 1100px  — small desktop / landscape tablet */
+@media (max-width: 1100px) {
+  .mlink-analytics {
+    --an-pad: 5.5rem 5vw;
+    --an-col-gap: 2.5rem;
+    --an-cards-max: 30rem;
+    --an-copy-max: 29rem;
+    --an-card-pad: 1.4rem 1.3rem;
+    --an-card-min-lg: 180px;
+    --an-fig: 1.7rem;
+    --an-fig-lg: 2.3rem;
+  }
+}
+
+/* ≤ 900px  — stack: cards on cream, copy on red (each block owns its panel) */
+@media (max-width: 900px) {
+  .mlink-analytics {
+    --an-pad: 0;
+    --an-col-gap: 0;
+    --an-cards-max: 34rem;
+    --an-copy-max: 34rem;
+    --an-fig: 1.8rem;
+    --an-fig-lg: 2.4rem;
+    background: none;
+  }
+
+  .mlink-analytics::before {
+    display: none;
+  }
+
+  .mlink-analytics__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .mlink-analytics__left {
+    justify-content: center;
+    padding: 4.25rem 6vw 4.5rem;
+    background: var(--mlink-panel-white);
+  }
+
+  .mlink-analytics__right {
+    justify-content: center;
+    padding: 4.25rem 6vw 4.75rem;
+    background: linear-gradient(
+      135deg,
+      var(--mlink-panel-red) 0%,
+      var(--mlink-panel-red-deep) 100%
+    );
+  }
+}
+
+/* ≤ 640px  — large phones */
+@media (max-width: 640px) {
+  .mlink-analytics {
+    --an-card-gap: 0.8rem;
+    --an-card-pad: 1.15rem 1.05rem;
+    --an-card-min: 128px;
+    --an-card-min-lg: 160px;
+    --an-fig: 1.45rem;
+    --an-fig-lg: 2rem;
+    --an-headline: clamp(1.9rem, 8vw, 2.4rem);
+    --an-body: 1rem;
+    --an-list: 0.94rem;
+  }
+
+  .mlink-analytics__left {
+    padding: 3.5rem 1.25rem 3.75rem;
+  }
+
+  .mlink-analytics__right {
+    padding: 3.5rem 1.25rem 4rem;
+  }
+
+  .mlink-stat {
+    border-radius: 18px;
+  }
+
+  .mlink-stat__badge {
+    top: 0.9rem;
+    right: 0.9rem;
+  }
+}
+
+/* ≤ 420px  — small phones */
+@media (max-width: 420px) {
+  .mlink-analytics {
+    --an-card-pad: 1rem 0.9rem;
+    --an-card-min: 118px;
+    --an-card-min-lg: 150px;
+    --an-fig: 1.3rem;
+    --an-fig-lg: 1.75rem;
+    --an-list: 0.9rem;
+  }
+
+  .mlink-stat__label,
+  .mlink-stat__place {
+    font-size: 0.74rem;
+  }
+
+  .mlink-stat__badge {
+    font-size: 0.64rem;
+    padding: 0.2rem 0.5rem;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .mlink-zoom {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .mlink-stat__line {
+    stroke-dashoffset: 0;
+    animation: none !important;
+  }
+
+  .mlink-stat__area {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .mlink-stat__bar i {
+    width: var(--w, 40%);
+    transition: none;
+  }
+
+  .mlink-stat,
+  .mlink-analytics__cta,
+  .mlink-analytics__cta svg {
+    transition: none;
+  }
+}

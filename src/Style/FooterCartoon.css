@@ -1,0 +1,502 @@
+/* =========================================================
+   FOOTER — cartoon layer (imported by Footer.jsx after Footer.css)
+   ========================================================= */
+.mlink-footer {
+  /* room for Mlinky to stand on top of the bar */
+  padding-top: 7rem;
+}
+
+.mlink-footer__bar {
+  position: relative;
+  opacity: 0;
+}
+
+.mlink-footer--in .mlink-footer__bar {
+  animation: ft-bar-in 0.95s cubic-bezier(0.3, 1.35, 0.5, 1) both;
+}
+
+@keyframes ft-bar-in {
+  0% {
+    opacity: 0;
+    transform: translateY(90px) scale(0.96, 0.9);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8px) scale(1.01, 1.02);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* content sits above the floating bits */
+.mlink-footer__top,
+.mlink-footer__divider,
+.mlink-footer__bottom {
+  position: relative;
+  z-index: 1;
+  text-align: left;
+}
+
+/* ---------- staggered pop-in ---------- */
+.ft-rv {
+  opacity: 0;
+}
+
+.mlink-footer--in .ft-rv {
+  animation: ft-pop 0.7s cubic-bezier(0.3, 1.5, 0.5, 1)
+    calc(var(--d, 0s) + 0.35s) both;
+}
+
+@keyframes ft-pop {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- screen-reader text ---------- */
+.ft-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+/* ---------- Mlinky + bubble ---------- */
+.ft-pal {
+  position: absolute;
+  right: 7%;
+  bottom: calc(100% - 6px);
+  z-index: 2;
+  --mascot-size: 104px;
+  opacity: 0;
+}
+
+.mlink-footer--in .ft-pal {
+  animation: ft-pal-in 0.9s cubic-bezier(0.3, 1.6, 0.5, 1) 0.9s both;
+}
+
+@keyframes ft-pal-in {
+  from {
+    opacity: 0;
+    transform: translateY(70px) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.ft-pal__bubble {
+  position: absolute;
+  right: calc(var(--mascot-size) * 0.86);
+  bottom: calc(var(--mascot-size) * 0.88);
+  width: max-content;
+  margin: 0;
+  padding: 0.55rem 0.9rem;
+  background: #ffffff;
+  color: #120404;
+  font:
+    600 0.82rem/1.3 "Inter",
+    system-ui,
+    sans-serif;
+  border: 3px solid #030000;
+  border-radius: 1rem 1rem 0.3rem 1rem;
+  box-shadow: 4px 4px 0 #030000;
+  transform-origin: 100% 100%;
+  animation: ft-bubble 0.5s cubic-bezier(0.3, 1.7, 0.5, 1) both;
+  pointer-events: none;
+}
+
+@keyframes ft-bubble {
+  0% {
+    opacity: 0;
+    transform: scale(0.3) rotate(6deg);
+  }
+  60% {
+    opacity: 1;
+    transform: scale(1.1) rotate(-2deg);
+  }
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* ---------- drifting confetti ---------- */
+.ft-bit {
+  position: absolute;
+  z-index: 0;
+  display: block;
+  width: var(--s, 14px);
+  height: var(--s, 14px);
+  pointer-events: none;
+  opacity: 0.55;
+  animation: ft-drift 7s ease-in-out var(--f, 0s) infinite;
+}
+
+.ft-bit--star {
+  background: #ffd23f;
+  clip-path: polygon(
+    50% 0,
+    62% 38%,
+    100% 50%,
+    62% 62%,
+    50% 100%,
+    38% 62%,
+    0 50%,
+    38% 38%
+  );
+}
+
+.ft-bit--dot {
+  background: #ffffff;
+  border-radius: 50%;
+}
+
+.ft-bit--ring {
+  border: 3px solid rgba(255, 255, 255, 0.85);
+  border-radius: 50%;
+}
+
+@keyframes ft-drift {
+  0%,
+  100% {
+    transform: translate(0, 0) rotate(0);
+  }
+  50% {
+    transform: translate(10px, -16px) rotate(40deg);
+  }
+}
+
+/* ---------- logo: letters jump on hover ---------- */
+.ft-letter {
+  display: inline-block;
+  transform-origin: 50% 100%;
+}
+
+.mlink-footer__logo:hover .ft-letter {
+  animation: ft-letter 0.6s ease calc(var(--i) * 0.06s);
+}
+
+@keyframes ft-letter {
+  0%,
+  100% {
+    transform: none;
+  }
+  35% {
+    transform: translateY(-0.28em) scale(0.92, 1.14);
+  }
+  65% {
+    transform: translateY(0) scale(1.12, 0.86);
+  }
+}
+
+/* ---------- social bubbles ---------- */
+.mlink-footer--in .mlink-footer__social a {
+  animation: ft-pop 0.6s cubic-bezier(0.3, 1.7, 0.5, 1)
+    calc(0.8s + var(--i) * 0.12s) backwards;
+}
+
+.mlink-footer__social a {
+  transition:
+    transform 0.3s cubic-bezier(0.3, 1.9, 0.5, 1),
+    background 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.2s ease,
+    border-color 0.18s ease;
+}
+
+.mlink-footer__social a:hover {
+  transform: translateY(-5px) rotate(-8deg) scale(1.12);
+  background: #ffffff;
+  color: #123a73;
+  border-color: #030000;
+  box-shadow: 3px 3px 0 #030000;
+}
+
+.mlink-footer__social a:hover svg {
+  animation: cartoon-wiggle 0.5s ease-in-out;
+}
+
+.mlink-footer__social a:active {
+  transform: scale(1.08, 0.88);
+}
+
+/* ---------- links: lean in, sparkle, squiggle ---------- */
+.mlink-footer__col a {
+  position: relative;
+  transition:
+    transform 0.3s cubic-bezier(0.3, 1.9, 0.5, 1),
+    color 0.15s ease;
+}
+
+.mlink-footer__col a::before {
+  content: "\2726";
+  position: absolute;
+  left: -1.25rem;
+  top: 50%;
+  color: #ffd23f;
+  font-size: 0.85rem;
+  transform: translateY(-50%) scale(0) rotate(-90deg);
+  transition: transform 0.35s cubic-bezier(0.3, 1.9, 0.5, 1);
+}
+
+.mlink-footer__col a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -6px;
+  height: 6px;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='6' viewBox='0 0 12 6'%3E%3Cpath d='M0 3Q3 0 6 3T12 3' fill='none' stroke='white' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E")
+    repeat-x 0 0 / 12px 6px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mlink-footer__col a:hover {
+  transform: translateX(8px) rotate(-1.5deg);
+}
+
+.mlink-footer__col a:hover::before {
+  transform: translateY(-50%) scale(1) rotate(0);
+}
+
+.mlink-footer__col a:hover::after {
+  opacity: 0.9;
+  animation: ft-squiggle 0.7s linear infinite;
+}
+
+@keyframes ft-squiggle {
+  to {
+    background-position: 12px 0;
+  }
+}
+
+/* ---------- newsletter ---------- */
+.mlink-footer__form input {
+  transition:
+    box-shadow 0.25s ease,
+    background 0.2s ease,
+    transform 0.3s cubic-bezier(0.3, 1.9, 0.5, 1);
+}
+
+.mlink-footer__form input:focus {
+  background: rgba(255, 255, 255, 0.16);
+  transform: scale(1.02);
+  box-shadow: 3px 3px 0 #030000;
+}
+
+.mlink-footer__form button {
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    opacity 0.15s ease;
+}
+
+.mlink-footer__form button:hover {
+  animation: cartoon-jelly 0.6s ease;
+}
+
+.mlink-footer__form button:active {
+  animation: none;
+  transform: scale(1.06, 0.88);
+}
+
+.mlink-footer__form button.is-done {
+  background: #ffd23f;
+  color: #120404;
+  animation: cartoon-jelly 0.7s ease;
+}
+
+.ft-thanks {
+  min-height: 1.3em;
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #ffd23f;
+}
+
+.ft-thanks:not(:empty) {
+  animation: ft-bubble 0.5s cubic-bezier(0.3, 1.7, 0.5, 1) both;
+  transform-origin: 0 50%;
+}
+
+/* ---------- paper plane flies across the divider ---------- */
+.mlink-footer__divider {
+  overflow: visible;
+}
+
+.ft-plane {
+  position: absolute;
+  top: -13px;
+  left: 0;
+  width: 28px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.ft-plane svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(2px 2px 0 rgba(3, 0, 0, 0.5));
+}
+
+.ft-plane::before {
+  content: "";
+  position: absolute;
+  right: 100%;
+  top: 50%;
+  width: 90px;
+  border-top: 2px dashed rgba(255, 255, 255, 0.7);
+}
+
+.mlink-footer--in .ft-plane {
+  animation: ft-fly 2.6s cubic-bezier(0.45, 0.05, 0.4, 1) 1.1s both;
+}
+
+@keyframes ft-fly {
+  0% {
+    opacity: 0;
+    left: -30px;
+    transform: translateY(8px) rotate(14deg);
+  }
+  10% {
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-14px) rotate(-12deg);
+  }
+  55% {
+    transform: translateY(6px) rotate(10deg);
+  }
+  80% {
+    transform: translateY(-10px) rotate(-8deg);
+  }
+  100% {
+    opacity: 0;
+    left: calc(100% + 40px);
+    transform: translateY(0) rotate(0);
+  }
+}
+
+/* ---------- bottom bar + back to top ---------- */
+.ft-end {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.ft-top {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  border: 3px solid #030000;
+  border-radius: 50%;
+  background: #ffffff;
+  color: #123a73;
+  box-shadow: 3px 3px 0 #030000;
+  cursor: pointer;
+  animation: ft-hop 2.8s ease-in-out infinite;
+  transition: box-shadow 0.2s ease;
+}
+
+.ft-top svg {
+  width: 18px;
+  height: 18px;
+}
+
+.ft-top:hover {
+  animation: cartoon-jelly 0.6s ease;
+}
+
+.ft-top:active {
+  animation: none;
+  transform: scale(1.08, 0.86);
+}
+
+.ft-top:focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 3px;
+}
+
+@keyframes ft-hop {
+  0%,
+  70%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+  78% {
+    transform: translateY(0) scale(1.1, 0.88);
+  }
+  88% {
+    transform: translateY(-7px) scale(0.94, 1.1);
+  }
+  95% {
+    transform: translateY(0) scale(1.05, 0.95);
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .ft-pal {
+    --mascot-size: 88px;
+    right: 6%;
+  }
+}
+
+@media (max-width: 560px) {
+  .mlink-footer {
+    padding-top: 6rem;
+  }
+  .ft-pal {
+    --mascot-size: 74px;
+    right: 8%;
+  }
+  .ft-pal__bubble {
+    display: none;
+  }
+  .ft-end {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
+/* ---------- reduced motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .mlink-footer__bar,
+  .ft-rv,
+  .ft-pal {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .ft-bit,
+  .ft-top,
+  .ft-plane,
+  .ft-pal__bubble,
+  .ft-thanks,
+  .mlink-footer__social a,
+  .mlink-footer__form button,
+  .mlink-footer__logo .ft-letter,
+  .mlink-footer__col a:hover::after {
+    animation: none !important;
+  }
+
+  .ft-plane {
+    display: none;
+  }
+}

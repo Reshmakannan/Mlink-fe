@@ -1,0 +1,473 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap");
+
+/* =========================================================
+   TOKENS  (breakpoints below only change these values)
+   ========================================================= */
+.lksh-section {
+  /* background palette — navy / dark blue / slight blue / white */
+  --lksh-navy-deep: #0b1f3a;
+  --lksh-navy: #123a73;
+  --lksh-blue-bright: #1d5fbf;
+  --lksh-white: #ffffff;
+  --lksh-ink: #0b1f3a;
+  --lksh-ice: #dfeeff;
+
+  /* layout */
+  --lksh-pad: 6.5rem 6vw;
+  --lksh-gap: 4rem;
+  --lksh-stage-h: 38rem;
+  --lksh-phone-w: 16rem;
+  --lksh-side-dx: 12rem;
+  --lksh-headline: clamp(2.3rem, 4vw, 3.4rem);
+
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(
+    120% 140% at 12% 15%,
+    var(--lksh-blue-bright) 0%,
+    var(--lksh-navy) 42%,
+    var(--lksh-navy-deep) 100%
+  );
+  color: var(--lksh-white);
+  font-family: "Inter", system-ui, sans-serif;
+  padding: var(--lksh-pad);
+}
+
+.lksh-section__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  gap: var(--lksh-gap);
+  align-items: center;
+}
+
+/* =========================================================
+   COPY
+   ========================================================= */
+.lksh-section__copy {
+  max-width: 46ch;
+}
+
+.lksh-section__headline {
+  font-family: "Fraunces", serif;
+  font-weight: 500;
+  font-size: var(--lksh-headline);
+  line-height: 1.08;
+  letter-spacing: -0.015em;
+  margin: 0 0 1.5rem;
+  color: var(--lksh-white);
+}
+
+.lksh-section__sub {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--lksh-ice);
+  margin: 0 0 2.4rem;
+  max-width: 42ch;
+}
+
+.lksh-section__cta {
+  display: inline-block;
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: var(--lksh-ink);
+  background: var(--lksh-white);
+  border: none;
+  border-radius: 999px;
+  padding: 1rem 2.3rem;
+  cursor: pointer;
+  box-shadow:
+    0 14px 30px -10px rgba(11, 31, 58, 0.45),
+    inset 0 -2px 0 rgba(18, 58, 115, 0.14);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.lksh-section__cta:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 20px 36px -10px rgba(11, 31, 58, 0.5),
+    inset 0 -2px 0 rgba(18, 58, 115, 0.14);
+}
+
+.lksh-section__cta:focus-visible {
+  outline: 3px solid var(--lksh-white);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   STAGE  (phones only)
+   ========================================================= */
+.lksh-section__stage {
+  position: relative;
+  width: 100%;
+  height: var(--lksh-stage-h);
+}
+
+/* ---------------------------------------------------------
+   PHONE
+   --------------------------------------------------------- */
+.lksh-phone {
+  --dx: 0rem;
+  --dy: 0rem;
+  --r: 0deg;
+  --s: 1;
+  --tx: calc(-50% + var(--dx));
+  --ty: calc(-50% + var(--dy));
+
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--lksh-phone-w);
+  aspect-ratio: 9 / 19;
+  padding: 0.55rem;
+  border-radius: 2.7rem;
+  background: linear-gradient(145deg, #3a3a40 0%, #131316 45%, #050506 100%);
+  box-shadow:
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.16),
+    inset 0 0 0 4px rgba(0, 0, 0, 0.55),
+    0 50px 80px -24px rgba(0, 0, 0, 0.7),
+    0 22px 36px -22px rgba(0, 0, 0, 0.6);
+  transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(var(--s));
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.lksh-phone--center {
+  z-index: 3;
+}
+
+.lksh-phone--left {
+  --dx: calc(var(--lksh-side-dx) * -1);
+  --dy: 2.4rem;
+  --r: -9deg;
+  --s: 0.86;
+  z-index: 2;
+}
+
+.lksh-phone--right {
+  --dx: var(--lksh-side-dx);
+  --dy: 3.2rem;
+  --r: 8deg;
+  --s: 0.86;
+  z-index: 2;
+}
+
+.lksh-phone__btn {
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(180deg, #2b2b30, #0c0c0e);
+}
+
+.lksh-phone__btn--l1 {
+  left: -2.5px;
+  top: 17%;
+  height: 6%;
+}
+
+.lksh-phone__btn--l2 {
+  left: -2.5px;
+  top: 25%;
+  height: 9%;
+}
+
+.lksh-phone__btn--r {
+  right: -2.5px;
+  top: 26%;
+  height: 12%;
+}
+
+.lksh-phone__screen {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 2.2rem;
+  overflow: hidden;
+  background: #fff;
+}
+
+.lksh-phone__screen img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  user-select: none;
+}
+
+.lksh-phone__island {
+  position: absolute;
+  top: 0.85rem;
+  left: 50%;
+  width: 28%;
+  height: 1.45rem;
+  transform: translateX(-50%);
+  border-radius: 999px;
+  background: #050506;
+  z-index: 3;
+}
+
+.lksh-phone__glare {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.26) 0%, rgba(255, 255, 255, 0) 36%),
+    linear-gradient(0deg, rgba(0, 0, 0, 0.06), rgba(0, 0, 0, 0) 30%);
+}
+
+/* ---- placeholder screen (shown until you add pictures) ---- */
+.lksh-ph {
+  width: 100%;
+  height: 100%;
+  padding: 3.6rem 1.2rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.7rem;
+  background: linear-gradient(180deg, #ffffff 0%, #dfeeff 100%);
+}
+
+.lksh-ph__avatar {
+  width: 4.2rem;
+  height: 4.2rem;
+  border-radius: 50%;
+  margin-bottom: 0.4rem;
+  background: radial-gradient(circle at 30% 25%, #2b6fe5, #123a73);
+  box-shadow: 0 10px 20px -8px rgba(18, 58, 115, 0.6);
+}
+
+.lksh-ph__line {
+  display: block;
+  height: 0.55rem;
+  border-radius: 999px;
+  background: rgba(11, 31, 58, 0.12);
+}
+
+.lksh-ph__line--a {
+  width: 55%;
+}
+
+.lksh-ph__line--b {
+  width: 38%;
+  margin-bottom: 1rem;
+}
+
+.lksh-ph__btn {
+  display: block;
+  width: 100%;
+  height: 2.6rem;
+  border-radius: 999px;
+  background: #fff;
+  border: 1px solid rgba(18, 58, 115, 0.14);
+  box-shadow: 0 8px 16px -12px rgba(18, 58, 115, 0.5);
+}
+
+.lksh-ph__btn--solid {
+  background: linear-gradient(135deg, #1d5fbf, #123a73);
+  border-color: transparent;
+}
+
+.lksh-ph--left .lksh-ph__avatar,
+.lksh-ph--right .lksh-ph__avatar {
+  border-radius: 1.1rem;
+}
+
+/* =========================================================
+   SCROLL ENTRANCE
+   1) copy slides in from the left, line by line
+   2) phones jump up from the bottom, one by one
+   ========================================================= */
+.lksh-section__headline,
+.lksh-section__sub,
+.lksh-section__cta {
+  opacity: 0;
+  transform: translateX(-70px);
+}
+
+.lksh-section.lksh-in .lksh-section__headline {
+  animation: lksh-slide-right 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0s both;
+}
+
+.lksh-section.lksh-in .lksh-section__sub {
+  animation: lksh-slide-right 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.15s both;
+}
+
+.lksh-section.lksh-in .lksh-section__cta {
+  animation: lksh-slide-right 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
+}
+
+.lksh-section.lksh-in .lksh-phone--left {
+  animation: lksh-phone-jump 1.15s cubic-bezier(0.3, 0.7, 0.4, 1) 0.35s both;
+}
+
+.lksh-section.lksh-in .lksh-phone--center {
+  animation: lksh-phone-jump 1.15s cubic-bezier(0.3, 0.7, 0.4, 1) 0.75s both;
+}
+
+.lksh-section.lksh-in .lksh-phone--right {
+  animation: lksh-phone-jump 1.15s cubic-bezier(0.3, 0.7, 0.4, 1) 1.15s both;
+}
+
+@keyframes lksh-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(-70px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes lksh-phone-jump {
+  0% {
+    opacity: 0;
+    transform: translate(var(--tx), calc(var(--ty) + 150px)) rotate(var(--r))
+      scale(var(--s));
+  }
+  15% {
+    opacity: 1;
+  }
+  58% {
+    opacity: 1;
+    transform: translate(var(--tx), calc(var(--ty) - 26px)) rotate(var(--r))
+      scale(var(--s));
+  }
+  78% {
+    transform: translate(var(--tx), calc(var(--ty) + 7px)) rotate(var(--r))
+      scale(var(--s));
+  }
+  100% {
+    opacity: 1;
+    transform: translate(var(--tx), var(--ty)) rotate(var(--r)) scale(var(--s));
+  }
+}
+
+/* =========================================================
+   BREAKPOINTS  (only tokens change)
+   ========================================================= */
+
+/* ≤ 1100px  — small desktop / landscape tablet */
+@media (max-width: 1100px) {
+  .lksh-section {
+    --lksh-pad: 5.5rem 5vw;
+    --lksh-gap: 2.5rem;
+    --lksh-stage-h: 34rem;
+    --lksh-phone-w: 14rem;
+    --lksh-side-dx: 10.2rem;
+  }
+}
+
+/* ≤ 900px  — portrait tablet: stack, phones on top, centered copy */
+@media (max-width: 900px) {
+  .lksh-section {
+    --lksh-pad: 4.5rem 6vw 5rem;
+    --lksh-gap: 2.5rem;
+    --lksh-stage-h: 33rem;
+    --lksh-phone-w: 14rem;
+    --lksh-side-dx: 10.5rem;
+  }
+
+  .lksh-section__inner {
+    grid-template-columns: 1fr;
+  }
+
+  .lksh-section__stage {
+    order: -1;
+    max-width: 38rem;
+    margin: 0 auto;
+  }
+
+  .lksh-section__copy {
+    max-width: 38rem;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .lksh-section__sub {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* ≤ 640px  — large phones */
+@media (max-width: 640px) {
+  .lksh-section {
+    --lksh-pad: 3.75rem 1.25rem 4.25rem;
+    --lksh-stage-h: 27rem;
+    --lksh-phone-w: 11.5rem;
+    --lksh-side-dx: 7.6rem;
+    --lksh-headline: clamp(2rem, 8vw, 2.5rem);
+  }
+
+  .lksh-phone {
+    padding: 0.42rem;
+    border-radius: 2.2rem;
+  }
+
+  .lksh-phone__screen {
+    border-radius: 1.8rem;
+  }
+
+  .lksh-phone__island {
+    top: 0.65rem;
+    height: 1.1rem;
+  }
+
+  .lksh-ph {
+    padding-top: 2.8rem;
+  }
+
+  .lksh-ph__avatar {
+    width: 3.2rem;
+    height: 3.2rem;
+  }
+
+  .lksh-ph__btn {
+    height: 2rem;
+  }
+
+  .lksh-section__sub {
+    font-size: 1rem;
+  }
+}
+
+/* ≤ 420px  — small phones */
+@media (max-width: 420px) {
+  .lksh-section {
+    --lksh-stage-h: 23rem;
+    --lksh-phone-w: 9.6rem;
+    --lksh-side-dx: 6.1rem;
+  }
+
+  .lksh-phone__btn {
+    display: none;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .lksh-section__headline,
+  .lksh-section__sub,
+  .lksh-section__cta,
+  .lksh-phone {
+    opacity: 1;
+    animation: none !important;
+  }
+
+  .lksh-section__headline,
+  .lksh-section__sub,
+  .lksh-section__cta {
+    transform: none;
+  }
+
+  .lksh-section__cta {
+    transition: none;
+  }
+}
